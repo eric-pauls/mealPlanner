@@ -19,8 +19,35 @@ function CreateMealPlan() {
         </div>
         <button onClick={goToEdit}> Create Meal Plan</button>
       </form>
-      <Link to="/">Return Home</Link>
+      <Link to="/HomePage">Return Home</Link>
       <br />
+      <h2>View Meal Plan Table</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>planID</th>
+            <th>planName</th>
+            <th>userID</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Health Mode</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>Diet Over</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>Average Meal</td>
+            <td>1</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }
