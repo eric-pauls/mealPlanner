@@ -1,7 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function HomePage() {
+
+  const history = useHistory();
+
+  const editPlan = () => {
+    history.push("/EditMealPlan");
+  };
+
   return (
     <div>
       <h1>Home: Your Meal Plan</h1>
@@ -12,6 +20,8 @@ function HomePage() {
         <option value="dietOver">Diet Over</option>
         <option value="mix">Average Meal</option>
       </select>
+      <button onClick={editPlan}>Edit Meal Plan</button>
+      <button>Delete Meal Plan</button>
       <table>
         <thead>
           <tr>

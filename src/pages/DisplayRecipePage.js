@@ -16,7 +16,8 @@ function DisplayRecipePage() {
       </div>
       <div>Calories: 600</div>
       <div>Meal Type: Breakfast</div>
-      <button>Edit Recipe</button>
+      <button>Edit Recipe</button><br/>
+      <button>Delete Recipe</button>
       <br />
       <Link to="/HomePage">Return Home</Link>
       <br />
