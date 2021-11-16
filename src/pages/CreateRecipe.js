@@ -6,7 +6,7 @@ function CreateRecipe() {
   const history = useHistory();
 
   const goHome = () => {
-    history.push("/HomePage");
+    history.push("/");
   };
 
   return (
@@ -38,7 +38,7 @@ function CreateRecipe() {
         <br />
         <button onClick={goHome}> Save Recipe</button>
       </form>
-      <Link to="/HomePage">Cancel</Link>
+      <Link to="/">Cancel</Link>
       <br />
       <h2>View Recipes Table</h2>
       <table>
@@ -72,54 +72,6 @@ function CreateRecipe() {
             </td>
             <td>800</td>
             <td>1</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>View Meal Types Table</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>typeID</th>
-            <th>mealName</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>Breakfast</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>Lunch</td> 
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>Dinner</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h2>View Recipes/Meal Types Table</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>typeID</th>
-            <th>recipeID</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>2</td> 
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>3</td>
           </tr>
         </tbody>
       </table>

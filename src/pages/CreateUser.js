@@ -19,7 +19,9 @@ function CreateUser() {
         </div>
         <button onClick={goHome}> Create User</button>
       </form>
-      <Link to="/">Return to Login</Link>
+      <Link to="/LoginPage">Return to Login</Link>
+      <br />
+      <Link to="/">Return to Homepage</Link>
       <br />
       <h2>View User Table</h2>
       <table>

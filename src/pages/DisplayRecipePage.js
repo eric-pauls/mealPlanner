@@ -19,7 +19,7 @@ function DisplayRecipePage() {
       <button>Edit Recipe</button><br/>
       <button>Delete Recipe</button>
       <br />
-      <Link to="/HomePage">Return Home</Link>
+      <Link to="/">Return Home</Link>
       <br />
     </div>
   );

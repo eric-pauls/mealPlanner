@@ -7,6 +7,10 @@ import CreateRecipe from "./pages/CreateRecipe";
 import DisplayRecipePage from "./pages/DisplayRecipePage";
 import EditMealPlan from "./pages/EditMealPlan";
 import CreateMealPlan from "./pages/CreateMealPlan";
+import ViewMealPlans from "./pages/ViewMealPlans";
+import ViewRecipes from "./pages/ViewRecipes";
+import ViewMealTypes from "./pages/ViewMealTypes"
+import ViewUsers from "./pages/ViewUsers"
 import "./App.css";
 
 function App() {
@@ -17,10 +21,10 @@ function App() {
           <div>
             <Switch>
               <Route path="/" exact>
-                <LoginPage />
-              </Route>
-              <Route path="/HomePage">
                 <HomePage />
+              </Route>
+              <Route path="/LoginPage">
+                <LoginPage />
               </Route>
               <Route path="/CreateUser">
                 <CreateUser />
@@ -36,6 +40,21 @@ function App() {
               </Route>
               <Route path="/CreateMealPlan">
                 <CreateMealPlan />
+              </Route>
+              <Route path="/CreateMealPlan">
+                <CreateMealPlan />
+              </Route>
+              <Route path="/ViewMealPlans">
+                <ViewMealPlans />
+              </Route>
+              <Route path="/ViewRecipes">
+                <ViewRecipes />
+              </Route>
+              <Route path="/ViewUsers">
+                <ViewUsers />
+              </Route>
+              <Route path="/ViewMealTypes">
+                <ViewMealTypes />
               </Route>
             </Switch>
           </div>

@@ -6,7 +6,7 @@ function LoginPage() {
   const history = useHistory();
 
   const goHome = () => {
-    history.push("/HomePage");
+    history.push("/");
   };
 
   return (
@@ -20,6 +20,8 @@ function LoginPage() {
         <button onClick={goHome}> Log In</button>
       </form>
       <Link to="/CreateUser">Create Account</Link>
+      <br />
+      <Link to="/">Return to Homepage</Link>
       <br />
       <h2>View User Table</h2>
       <table>

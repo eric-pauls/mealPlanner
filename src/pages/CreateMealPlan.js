@@ -19,7 +19,7 @@ function CreateMealPlan() {
         </div>
         <button onClick={goToEdit}> Create Meal Plan</button>
       </form>
-      <Link to="/HomePage">Return Home</Link>
+      <Link to="/">Return Home</Link>
       <br />
       <h2>View Meal Plan Table</h2>
       <table>
