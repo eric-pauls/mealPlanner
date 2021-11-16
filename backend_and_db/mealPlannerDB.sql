@@ -70,7 +70,7 @@ INSERT INTO `mealTypes` VALUES (1, 'Breakfast'), (2, 'Lunch'), (3, 'Dinner');
 
 INSERT INTO `mealPlans` VALUES (1, 'Healthy Choices', 1), (2, 'What is a diet?', 1), (3, 'Protein', 1);
 
-INSERT INTO `recipesMealTypes` VALUES (3, 1), (1,2) , (2,3);
+INSERT INTO `recipesMealTypes` VALUES (3, 1), (1,2) , (2,3);  
 
 INSERT INTO `recipesMealPlans` VALUES (1, 1, 'Monday', 'Dinner'), (2, 1, 'Tuesday', 'Breakfast'), (3, 1, 'Wednesday', 'Lunch');
 
