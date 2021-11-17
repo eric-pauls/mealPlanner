@@ -1,12 +1,14 @@
 import express from "express";
 import mysql from "mysql";
 import cors from "cors";
+import bodyParser from "body-parser";
 
 const app = express();
 
 const PORT = 9604;
 
 app.use(cors());
+app.use(bodyParser());
 
 // setup database
 const db = mysql.createPool({
@@ -54,9 +56,9 @@ app.get("/mealtypes", (req, res) => {
 
 // POST for recipes
 app.post('/recipes', function(req, res){
-  let sql = "INSERT INTO recipes (recipeID, recipeName, ingredients, instruction, calorieCount, userID) VALUES (?,?,?,?,?,?)";
-  let inserts = [req.body.recipeName, req.body.ingredients, req.body.instruction, req.body.calorieCount, req.body.calorieCount];
-  db.query(sql, inserts, function(error, data, fields){
+  let sql = "INSERT INTO recipes (recipeName, ingredients, instruction, calorieCount, userID) VALUES (:recipeNameInput, :ingredientsInput, :instructionInput, :calorieCountInput, :userIDInput)";
+  let inserts = [req.body.recipeName, req.body.ingredients, req.body.instruction, req.body.calorieCount, req.body.userID];
+  db.query(sql, inserts, function(err, data, fields){
       if (err) throw err;
       console.log("Recipe added successfully.")
   });

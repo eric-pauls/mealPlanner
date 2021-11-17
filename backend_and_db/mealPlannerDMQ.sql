@@ -24,8 +24,8 @@ INSERT INTO users (userName)
 VALUES (:userNameInput);
 
 -- Create new recipe
-INSERT INTO recipes (recipeName, ingredients, instruction, calorieCount)
-VALUES (:recipeNameInput, :ingredientsInput, :instructionInput, :calorieCountInput);
+INSERT INTO recipes (recipeName, ingredients, instruction, calorieCount, userID)
+VALUES (:recipeNameInput, :ingredientsInput, :instructionInput, :calorieCountInput, :userIDInput);
 
 -- Create new meal plan
 INSERT INTO mealPlans (planName)

@@ -1,9 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import UserDropdown from '../components/UserDropdown';
 
 function CreateRecipe() {
+
+  const [recipe, setRecipe] = useState('');
+  const [recipeName, setRecipeName] = useState('');
+  const [ingredients, setIngredients] = useState('');
+  const [instruction, setInstruction] = useState('');
+  const [calorieCount, setCalorieCount] = useState(0);
+  const [userID, setUserID] = useState(0);
+
   const history = useHistory();
+
+  const addRecipe = async () => {
+    console.log('check check')
+    const newRecipe = {recipeName, ingredients, instruction, calorieCount, userID}
+    const response = await fetch('/recipes', {
+      method: 'POST',
+      body: newRecipe,
+      headers: {
+          'Content-Type': 'application/json',
+      },
+  });
+  if (response.status === 201) {
+    
+  } else {
+      alert(`Failed to add recipe, status code = ${response.status}. Make sure all required fields are filled out.`);
+  }
+  history.push('/ViewRecipes')
+  }
 
   const goHome = () => {
     history.push("/");
@@ -14,29 +42,31 @@ function CreateRecipe() {
       <form>
         <h1>Create Recipe</h1>
         <div>
-          <label for="recipeName">Recipe Name:</label>
-          <input type="text" />
+          <UserDropdown userID={userID} onUserChange={setUserID}/>
+          <br />
+          <label>Recipe Name:</label>
+          <input type="text" onChange={setRecipeName} />
         </div>
         <div>
-          <label for="ingredients">Ingredients:</label>
-          <textarea></textarea>
+          <label>Ingredients:</label>
+          <textarea onChange={setIngredients}></textarea>
         </div>
         <div>
-          <label for="instructions">Instructions:</label>
-          <textarea></textarea>
+          <label>Instructions:</label>
+          <textarea onChange={setInstruction}></textarea>
         </div>
         <div>
-          <label for="calorieCount">Calories:</label>
-          <input type="text" />
+          <label>Calories:</label>
+          <input type="text" onChange={setCalorieCount}/>
         </div>
-        <label for='breakfast'>Breakfast</label>
+        <label>Breakfast</label>
         <input type='checkbox' name='breakfast'></input>
-        <label for='lunch'>Lunch</label>
+        <label>Lunch</label>
         <input type='checkbox' name='lunch'></input>
-        <label for='dinner'>Dinner</label>
+        <label>Dinner</label>
         <input type='checkbox' name='dinner'></input>
         <br />
-        <button onClick={goHome}> Save Recipe</button>
+        <button onClick={addRecipe}> Save Recipe</button>
       </form>
       <Link to="/">Cancel</Link>
       <br />

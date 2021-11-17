@@ -5,12 +5,6 @@ import { useState, useEffect } from 'react';
 function ViewRecipes() {
 
     const [recipes, setRecipes] = useState([]);
-    const [recipeID, setRecipeID] = useState([]);
-    const [recipeName, setRecipeName] = useState([]);
-    const [ingredients, setIngredients] = useState([]);
-    const [instruction, setInstruction] = useState([]);
-    const [calorieCount, setCalorieCount] = useState([]);
-    const [userID, setUserID] = useState([]);
 
     const getRecipes = async () => {
         const response = await fetch('http://flip1.engr.oregonstate.edu:9604/recipes');
