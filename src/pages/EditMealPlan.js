@@ -85,7 +85,7 @@ function EditMealPlan() {
       <button>Update Meal Plan</button>
       <br />
 
-      <Link to="/HomePage">Return Home</Link>
+      <Link to="/">Return Home</Link>
       
       <h2>View Meal Plans Table</h2>
       <table>

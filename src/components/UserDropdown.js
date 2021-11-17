@@ -36,10 +36,13 @@ function UserDropdown({userID, onUserChange}) {
     };
 
     return (
-        <select onChange={changeUser} val={userID}>
-            <option>--Select User--</option>
-            {mapping()}
-        </select>
+        <div>
+            <label>Choose User: </label>
+            <select onChange={changeUser} val={userID}>
+                <option>--Select User--</option>
+                {mapping()}
+            </select>
+        </div>
     )
 }
 
