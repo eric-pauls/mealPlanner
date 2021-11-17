@@ -41,9 +41,6 @@ function App() {
               <Route path="/CreateMealPlan">
                 <CreateMealPlan />
               </Route>
-              <Route path="/CreateMealPlan">
-                <CreateMealPlan />
-              </Route>
               <Route path="/ViewMealPlans">
                 <ViewMealPlans />
               </Route>

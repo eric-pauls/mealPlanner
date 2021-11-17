@@ -9,7 +9,7 @@ const PORT = 9604;
 app.use(cors());
 
 // setup database
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: "classmysql.engr.oregonstate.edu",
   user: "cs340_chintyl",
   password: "3239",
@@ -21,11 +21,7 @@ app.get("/users", (req, res) => {
   let sql = `SELECT * FROM users`;
   db.query(sql, function (err, data, fields) {
     if (err) throw err;
-    res.json({
-      status: 200,
-      data,
-      message: "User lists retrieved successfully",
-    });
+    res.send(data);
   });
 });
 
@@ -34,11 +30,7 @@ app.get("/recipes", (req, res) => {
   let sql = `SELECT * FROM recipes`;
   db.query(sql, function (err, data, fields) {
     if (err) throw err;
-    res.json({
-      status: 200,
-      data,
-      message: "Recipes retrieved successfully",
-    });
+    res.send(data);
   });
 });
 
@@ -47,11 +39,7 @@ app.get("/mealplans", (req, res) => {
   let sql = `SELECT * FROM mealPlans`;
   db.query(sql, function (err, data, fields) {
     if (err) throw err;
-    res.json({
-      status: 200,
-      data,
-      message: "Meal Plans retrieved successfully",
-    });
+    res.send(data);
   });
 });
 
@@ -60,11 +48,17 @@ app.get("/mealtypes", (req, res) => {
   let sql = `SELECT * FROM mealTypes`;
   db.query(sql, function (err, data, fields) {
     if (err) throw err;
-    res.json({
-      status: 200,
-      data,
-      message: "Meal Types retrieved successfully",
-    });
+    res.send(data);
+  });
+});
+
+// POST for recipes
+app.post('/recipes', function(req, res){
+  let sql = "INSERT INTO recipes (recipeID, recipeName, ingredients, instruction, calorieCount, userID) VALUES (?,?,?,?,?,?)";
+  let inserts = [req.body.recipeName, req.body.ingredients, req.body.instruction, req.body.calorieCount, req.body.calorieCount];
+  db.query(sql, inserts, function(error, data, fields){
+      if (err) throw err;
+      console.log("Recipe added successfully.")
   });
 });
 

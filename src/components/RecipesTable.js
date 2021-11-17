@@ -4,7 +4,7 @@ import Recipe from './Recipe'
 function RecipesTable({recipes}) {
     return (
         <div>
-            <h2>View Recipes Table</h2>
+            <h2>Recipes Table</h2>
         <table>
             <thead>
                     <tr>

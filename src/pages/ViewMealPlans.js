@@ -1,36 +1,32 @@
 import { Link } from "react-router-dom";
+import MealPlansTable from "../components/MealPlansTable";
+import { useState, useEffect } from 'react';
+
 
 function ViewMealPlans() {
 
+    const [mealPlans, setMealPlans] = useState([]);
+
+    const getMealPlans = async () => {
+        const response = await fetch('http://flip1.engr.oregonstate.edu:9604/mealplans');
+        
+        const data = await response.json();
+
+        if (response.ok) {
+            setMealPlans(data);
+        }
+        else {
+            console.error(`Could not fetch, status code = ${response.status}`)
+        }
+    }; 
+
+    useEffect(() => {
+        getMealPlans();
+    }, []);
+    
     return (
         <div>
-            <h2>View Meal Plans Table</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>planID</th>
-                        <th>planName</th>
-                        <th>userID</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Health Mode</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Diet Over</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Average Meal</td>
-                        <td>1</td>
-                    </tr>
-                </tbody>
-            </table>
+            <MealPlansTable mealPlans={mealPlans} />
             <Link to="/">Return to Homepage</Link>
         </div>
     )
