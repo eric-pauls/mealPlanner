@@ -32,8 +32,6 @@ function CreateMealPlan() {
 
   const history = useHistory();
 
-
-
   const goToEdit = () => {
     history.push("/EditMealPlan");
   };

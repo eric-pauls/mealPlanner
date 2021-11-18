@@ -9,6 +9,7 @@ function Recipe ({recipe}) {
             <td>{recipe.ingredients}</td>
             <td>{recipe.instruction}</td>
             <td>{recipe.calorieCount}</td>
+            <td>{recipe.typeID}</td>
             <td>{recipe.userID}</td>
         </tr>
     )

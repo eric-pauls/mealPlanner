@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import RecipesMealPlansTable from "../components/RecipesMealPlansTable";
 
 function EditMealPlan() {
   return (
@@ -19,37 +20,7 @@ function EditMealPlan() {
             <th>Saturday</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>
-              Breakfast <br /> Lunch <br /> Dinner
-            </td>
-            <td>
-              <Link to="/DisplayRecipePage">Pancakes</Link> <br /> Chilli <br />{" "}
-              Cheeseburger
-            </td>
-            <td>
-              French Toast <br /> Salad <br /> Chicken Pasta
-            </td>
-            <td>
-              Bagel <br /> PBJ <br /> StiryFry
-            </td>
-            <td>
-              Cereal <br /> Chicken Wrap <br /> Soup!
-            </td>
-            <td>
-              {" "}
-              Pancakes <br /> Turkey Sandwich <br /> Steak and Potatoes
-            </td>
-            <td>
-              Oatmeal
-              <br /> PBJ <br /> Cheeseburger
-            </td>
-            <td>
-              Pancakes <br /> Salad <br /> Chicken Pasta
-            </td>
-          </tr>
-        </tbody>
+        <RecipesMealPlansTable />
       </table>
       <h2>Add Meal to Meal Plan</h2>
       <label>Choose Recipe</label>

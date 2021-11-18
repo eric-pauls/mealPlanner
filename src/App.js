@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { useState } from "react";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import CreateUser from "./pages/CreateUser";
@@ -14,6 +15,9 @@ import ViewUsers from "./pages/ViewUsers"
 import "./App.css";
 
 function App() {
+
+  const [mealPlanToEdit, setMealPlanToEdit] = useState();
+
   return (
     <div className="App">
       <header className="App-header">
@@ -21,7 +25,7 @@ function App() {
           <div>
             <Switch>
               <Route path="/" exact>
-                <HomePage />
+                <HomePage setMealPlanToEdit={setMealPlanToEdit} />
               </Route>
               <Route path="/LoginPage">
                 <LoginPage />

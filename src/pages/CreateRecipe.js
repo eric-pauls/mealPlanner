@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import UserDropdown from '../components/UserDropdown';
+import MealTypesRadio from "../components/MealTypesRadio";
 
 function CreateRecipe() {
 
@@ -11,11 +12,12 @@ function CreateRecipe() {
   const [instruction, setInstruction] = useState('');
   const [calorieCount, setCalorieCount] = useState(0);
   const [userID, setUserID] = useState(null);
+  const [typeID, setTypeID] = useState(null);
 
   const history = useHistory();
 
   const addRecipe = async () => {
-    const newRecipe = { recipeName, ingredients, instruction, calorieCount, userID }
+    const newRecipe = { recipeName, ingredients, instruction, calorieCount, typeID, userID }
     if (userID !== null) {
       const response = await fetch('http://flip1.engr.oregonstate.edu:9604/recipes', {
         method: 'POST',
@@ -66,13 +68,7 @@ function CreateRecipe() {
             placeholder='Enter Calorie Count'
             onChange={e => setCalorieCount(e.target.value)} />
         </div>
-        <label>Breakfast</label>
-        <input type='checkbox' name='breakfast'></input>
-        <label>Lunch</label>
-        <input type='checkbox' name='lunch'></input>
-        <label>Dinner</label>
-        <input type='checkbox' name='dinner'></input>
-        <br />
+        <MealTypesRadio typeID={typeID} onMealTypeChange={setTypeID}/>
         <button onClick={addRecipe}> Save Recipe</button>
       </form>
       <Link to="/">Cancel</Link>

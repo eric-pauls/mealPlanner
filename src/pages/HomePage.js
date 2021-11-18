@@ -1,10 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import UserDropdown from "../components/UserDropdown";
+import MealPlansTable from "../components/MealPlansTable";
 
-function HomePage() {
+function HomePage({setMealPlanToEdit}) {
 
+
+  const [userID, setUserID] = useState(null);
+  const [mealPlans, setMealPlans] = useState([]);
   const history = useHistory();
+
+  const getMealPlansByUser = async userID => {
+    const response = await fetch(`http://flip1.engr.oregonstate.edu:9604/mealplans/${userID}`);
+
+    const data = await response.json();
+
+        if (response.ok) {
+            setMealPlans(data);
+        }
+        else {
+            console.error(`Could not fetch, status code = ${response.status}`)
+        }
+  }
 
   const editPlan = () => {
     history.push("/EditMealPlan");
@@ -16,61 +35,11 @@ function HomePage() {
       <br />
       <Link to="/CreateUser">Create New User Account</Link>
       <br />
-      <h1>Home: Your Meal Plan</h1>
-      <label>Choose Meal Plan</label>
-      <select id="dropdown">
-        <option value="">--Select one--</option>
-        <option value="healthy">Health Mode</option>
-        <option value="dietOver">Diet Over</option>
-        <option value="mix">Average Meal</option>
-      </select>
-      <button onClick={editPlan}>Edit Meal Plan</button>
-      <button>Delete Meal Plan</button>
-      <table>
-        <thead>
-          <tr>
-            <th>Meal</th>
-            <th>Sunday</th>
-            <th>Monday</th>
-            <th>Tuesday</th>
-            <th>Wednesday</th>
-            <th>Thursday</th>
-            <th>Friday</th>
-            <th>Saturday</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              Breakfast <br /> Lunch <br /> Dinner
-            </td>
-            <td>
-              <Link to="/DisplayRecipePage">Pancakes</Link> <br /> Chilli <br />{" "}
-              Cheeseburger
-            </td>
-            <td>
-              French Toast <br /> Salad <br /> Chicken Pasta
-            </td>
-            <td>
-              Bagel <br /> PBJ <br /> StiryFry
-            </td>
-            <td>
-              Cereal <br /> Chicken Wrap <br /> Soup!
-            </td>
-            <td>
-              {" "}
-              Pancakes <br /> Turkey Sandwich <br /> Steak and Potatoes
-            </td>
-            <td>
-              Oatmeal
-              <br /> PBJ <br /> Cheeseburger
-            </td>
-            <td>
-              Pancakes <br /> Salad <br /> Chicken Pasta
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <h1>Home: Your Meal Plans</h1>
+        <UserDropdown userID={userID} onUserChange={setUserID} />
+        <button onClick={() => getMealPlansByUser(userID)}>View Meal Plans</button>
+        <br />
+        <MealPlansTable mealPlans={mealPlans} />
       <Link to="/CreateRecipe">Create New Recipe</Link>
       <br />
       <Link to="/CreateMealPlan">Create New Meal Plan</Link>

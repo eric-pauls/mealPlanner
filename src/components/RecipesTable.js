@@ -13,6 +13,7 @@ function RecipesTable({recipes}) {
                         <th>ingredients</th>
                         <th>instruction</th>
                         <th>calorieCount</th>
+                        <th>typeID</th>
                         <th>userID</th>
                     </tr>
                 </thead>

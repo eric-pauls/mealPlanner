@@ -15,9 +15,11 @@ CREATE TABLE `recipes` (
   `ingredients` varchar(1000) NOT NULL, 
   `instruction` varchar(1000) NOT NULL, 
   `calorieCount` int(10),
+  `typeID` int(11) NOT NULL,
   `userID` int(11) NOT NULL,
   PRIMARY KEY (`recipeID`),
-  FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+  FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE,
+  FOREIGN KEY (`typeID`) REFERENCES `mealTypes` (`typeID`) ON DELETE CASCADE
 );
 
 
@@ -63,8 +65,8 @@ CREATE TABLE `recipesMealPlans` (
 
 INSERT INTO `users` VALUES (1, 'Eric'), (2, 'Tyler');
 
-INSERT INTO `recipes` VALUES (1, 'Chicken Parmesan', 'Chicken, Parmesan', 'Bake it in oven at 425F', 800, 1), (2, 'Pancakes', 'Flour, Eggs, Milk, Butter', 'Mix ingredients in bowl. Cook on Skillet.', 670, 1),
-(3, 'Roast Beef Sandwich', 'Roast Beef, Bread, Lettuce, Onions', 'Assemble sandwich.', 450, 1);
+INSERT INTO `recipes` VALUES (1, 'Chicken Parmesan', 'Chicken, Parmesan', 'Bake it in oven at 425F', 800, 3, 1), (2, 'Pancakes', 'Flour, Eggs, Milk, Butter', 'Mix ingredients in bowl. Cook on Skillet.', 670, 1, 1),
+(3, 'Roast Beef Sandwich', 'Roast Beef, Bread, Lettuce, Onions', 'Assemble sandwich.', 450, 2, 1);
 
 INSERT INTO `mealTypes` VALUES (1, 'Breakfast'), (2, 'Lunch'), (3, 'Dinner');
 
