@@ -34,7 +34,7 @@ function RecipesMealPlansTable({ planID }) {
     }; 
 
     useEffect(() => {
-        getRecipeMealPlans(1);
+        getRecipeMealPlans(planID);
     }, []);
 
     useEffect(() => {

@@ -25,7 +25,7 @@ function App() {
           <div>
             <Switch>
               <Route path="/" exact>
-                <HomePage mealPlanToEdit={mealPlanToEdit} setMealPlanToEdit={setMealPlanToEdit} />
+                <HomePage setMealPlanToEdit={setMealPlanToEdit} />
               </Route>
               <Route path="/LoginPage">
                 <LoginPage />

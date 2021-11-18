@@ -5,15 +5,15 @@ import { useState, useEffect } from 'react';
 import UserDropdown from "../components/UserDropdown";
 import MealPlansTable from "../components/MealPlansTable";
 
-function HomePage({ mealPlanToEdit, setMealPlanToEdit}) {
+function HomePage({ setMealPlanToEdit }) {
 
 
   const [userID, setUserID] = useState(null);
   const [mealPlans, setMealPlans] = useState([]);
   const history = useHistory();
 
-  const getMealPlansByUser = async userID => {
-    const response = await fetch(`http://flip1.engr.oregonstate.edu:9604/mealplans/${userID}`);
+  const getMealPlans = async () => {
+    const response = await fetch(`http://flip1.engr.oregonstate.edu:9604/mealplans`);
 
     const data = await response.json();
 
@@ -25,10 +25,19 @@ function HomePage({ mealPlanToEdit, setMealPlanToEdit}) {
         }
   }
 
+  const filterMealPlans = userID => {
+    const filteredMealPlans = mealPlans.filter((mealPlan) => mealPlan.userID === userID)
+    return filteredMealPlans
+  }
+
   const editPlan = mealPlan => {
     setMealPlanToEdit(mealPlan)
     history.push('/EditMealPlan')
   };
+
+  useEffect(() => {
+    getMealPlans();
+}, []);
 
   return (
     <div>
@@ -37,10 +46,10 @@ function HomePage({ mealPlanToEdit, setMealPlanToEdit}) {
       <Link to="/CreateUser">Create New User Account</Link>
       <br />
 
-      
+
       <h1>Home: Your Meal Plans</h1>
         <UserDropdown userID={userID} onUserChange={setUserID} />
-        <button onClick={() => getMealPlansByUser(userID)}>View Meal Plans</button>
+        <button onClick={() => filterMealPlans(userID)}>View Meal Plans</button>
         <br />
         <MealPlansTable mealPlans={mealPlans} editPlan={editPlan} />
       

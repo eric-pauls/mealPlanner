@@ -56,7 +56,7 @@ CREATE TABLE `recipesMealPlans` (
   `planID` int(11) NOT NULL,
   `day` varchar(10) NOT NULL,
   `assignedMeal` varchar(10) NOT NULL,
-  PRIMARY KEY (`recipeID`, `planID`),
+  PRIMARY KEY (`recipeID`, `planID`, `day`, `assignedMeal`),
   FOREIGN KEY (`planID`) REFERENCES `mealPlans` (`planID`),
   FOREIGN KEY (`recipeID`) REFERENCES `recipes` (`recipeID`)
 );
@@ -74,5 +74,5 @@ INSERT INTO `mealPlans` VALUES (1, 'Healthy Choices', 1), (2, 'What is a diet?',
 
 INSERT INTO `recipesMealTypes` VALUES (3, 1), (1,2) , (2,3);  
 
-INSERT INTO `recipesMealPlans` VALUES (1, 1, 'Monday', 'Dinner'), (2, 1, 'Tuesday', 'Breakfast'), (3, 1, 'Wednesday', 'Lunch');
+INSERT INTO `recipesMealPlans` VALUES (1, 3, 'Saturday', 'Dinner'), (2, 3, 'Saturday', 'Breakfast'), (3, 3, 'Saturday', 'Lunch');
 
