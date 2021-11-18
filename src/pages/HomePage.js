@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import UserDropdown from "../components/UserDropdown";
 import MealPlansTable from "../components/MealPlansTable";
 
-function HomePage({setMealPlanToEdit}) {
+function HomePage({ mealPlanToEdit, setMealPlanToEdit}) {
 
 
   const [userID, setUserID] = useState(null);
@@ -25,8 +25,9 @@ function HomePage({setMealPlanToEdit}) {
         }
   }
 
-  const editPlan = () => {
-    history.push("/EditMealPlan");
+  const editPlan = mealPlan => {
+    setMealPlanToEdit(mealPlan)
+    history.push('/EditMealPlan')
   };
 
   return (
@@ -35,11 +36,15 @@ function HomePage({setMealPlanToEdit}) {
       <br />
       <Link to="/CreateUser">Create New User Account</Link>
       <br />
+
+      
       <h1>Home: Your Meal Plans</h1>
         <UserDropdown userID={userID} onUserChange={setUserID} />
         <button onClick={() => getMealPlansByUser(userID)}>View Meal Plans</button>
         <br />
-        <MealPlansTable mealPlans={mealPlans} />
+        <MealPlansTable mealPlans={mealPlans} editPlan={editPlan} />
+      
+
       <Link to="/CreateRecipe">Create New Recipe</Link>
       <br />
       <Link to="/CreateMealPlan">Create New Meal Plan</Link>

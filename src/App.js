@@ -25,7 +25,7 @@ function App() {
           <div>
             <Switch>
               <Route path="/" exact>
-                <HomePage setMealPlanToEdit={setMealPlanToEdit} />
+                <HomePage mealPlanToEdit={mealPlanToEdit} setMealPlanToEdit={setMealPlanToEdit} />
               </Route>
               <Route path="/LoginPage">
                 <LoginPage />
@@ -40,7 +40,7 @@ function App() {
                 <CreateRecipe />
               </Route>
               <Route path="/EditMealPlan">
-                <EditMealPlan />
+                <EditMealPlan mealPlanToEdit={mealPlanToEdit} />
               </Route>
               <Route path="/CreateMealPlan">
                 <CreateMealPlan />
