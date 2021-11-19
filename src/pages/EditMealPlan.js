@@ -1,34 +1,55 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import RecipesMealPlansTable from "../components/RecipesMealPlansTable";
 import RecipeDropdown from "../components/RecipeDropdown";
 
 function EditMealPlan({ mealPlanToEdit }) {
 
-  const [mealPlanName, setMealPlanName] = useState(mealPlanToEdit.planName)
-  const [planID, setPlanID] = useState(mealPlanToEdit.planID)
+  const storedName = localStorage.getItem('savedName');
+  const storedID = Number(localStorage.getItem('savedID'));
+  const [mealPlanName, setMealPlanName] = useState(mealPlanToEdit.planName ? mealPlanToEdit.planName : storedName)
+  const [planID, setPlanID] = useState(mealPlanToEdit.planID ? mealPlanToEdit.planID : storedID);
   const [recipeID, setRecipeID] = useState(null);
   const [day, setDay] = useState(null);
   const [assignedMeal, setAssignedMeal] = useState(null);
 
+  useEffect(() => {
+    if (mealPlanToEdit !== undefined) {
+      localStorage.setItem('savedID', mealPlanToEdit.planID);
+    }
+  }, [mealPlanToEdit]);
+  useEffect(() => {
+    if (mealPlanToEdit !== undefined) {
+      localStorage.setItem('savedName', mealPlanToEdit.planName);
+    }
+  }, [mealPlanToEdit]);
+
+
+
   const addRecipeToMealPlan = async () => {
+
+    setMealPlanName(localStorage.getItem('savedName'));
+    setPlanID(localStorage.getItem('savedID'));
     const newAssignment = { recipeID, planID, day, assignedMeal }
+    if (recipeID !== null && day !== null && assignedMeal !== null) {
+      const response = await fetch('http://flip1.engr.oregonstate.edu:9604/recipesmealplans', {
+        method: 'POST',
+        body: JSON.stringify(newAssignment),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+      if (response.status === 201) {
 
-    const response = await fetch('http://flip1.engr.oregonstate.edu:9604/recipesmealplans', {
-      method: 'POST',
-      body: JSON.stringify(newAssignment),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    });
-    if (response.status === 201) {
-
-    } else {
-      alert(`Failed to add recipe to meal plan, status code = ${response.status}. Make sure all required fields are filled out.`);
-    };
-
-    window.location.reload(false);
+      } else {
+        alert(`Failed to add recipe to meal plan, status code = ${response.status}. Make sure all required fields are filled out.`);
+      };
+      window.location.reload(false);
+    }
+    else {
+      alert('Please fill out all required fields before submitting.')
+    }
   };
 
   return (
@@ -69,9 +90,9 @@ function EditMealPlan({ mealPlanToEdit }) {
       <label>Choose Meal</label>
       <select onChange={e => setAssignedMeal(e.target.value)}>
         <option value="">--Select one--</option>
-        <option>Breakfast</option>
-        <option>Lunch</option>
-        <option>Dinner</option>
+        <option value="Breakfast">Breakfast</option>
+        <option value="Lunch">Lunch</option>
+        <option value="Dinner">Dinner</option>
       </select>
       <br />
       <button onClick={() => addRecipeToMealPlan()}>Update Meal Plan</button>

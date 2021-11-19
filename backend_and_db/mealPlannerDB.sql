@@ -40,15 +40,6 @@ CREATE TABLE `mealPlans` (
   FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
 );
 
-DROP TABLE IF EXISTS `recipesMealTypes`;
-CREATE TABLE `recipesMealTypes` (
-  `typeID` int(11) NOT NULL,
-  `recipeID` int(11) NOT NULL,
-  PRIMARY KEY (`typeID`, `recipeID`),
-  FOREIGN KEY (`typeID`) REFERENCES `mealTypes` (`typeID`),
-  FOREIGN KEY (`recipeID`) REFERENCES `recipes` (`recipeID`)
-  
-);
 
 DROP TABLE IF EXISTS `recipesMealPlans`;
 CREATE TABLE `recipesMealPlans` (
