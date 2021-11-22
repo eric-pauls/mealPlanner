@@ -8,8 +8,8 @@ function EditMealPlan({ mealPlanToEdit }) {
 
   const storedName = localStorage.getItem('savedName');
   const storedID = Number(localStorage.getItem('savedID'));
-  const [mealPlanName, setMealPlanName] = useState(mealPlanToEdit.planName ? mealPlanToEdit.planName : storedName)
-  const [planID, setPlanID] = useState(mealPlanToEdit.planID ? mealPlanToEdit.planID : storedID);
+  const [mealPlanName, setMealPlanName] = useState(mealPlanToEdit ? mealPlanToEdit.planName : storedName)
+  const [planID, setPlanID] = useState(mealPlanToEdit ? mealPlanToEdit.planID : storedID);
   const [recipeID, setRecipeID] = useState(null);
   const [day, setDay] = useState(null);
   const [assignedMeal, setAssignedMeal] = useState(null);

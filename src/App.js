@@ -13,10 +13,14 @@ import ViewRecipes from "./pages/ViewRecipes";
 import ViewMealTypes from "./pages/ViewMealTypes"
 import ViewUsers from "./pages/ViewUsers"
 import "./App.css";
+import EditUser from "./pages/EditUser";
 
 function App() {
 
   const [mealPlanToEdit, setMealPlanToEdit] = useState();
+  const [userToEdit, setUserToEdit] = useState();
+  const [recipeToEdit, setRecipeToEdit] = useState();
+
 
   return (
     <div className="App">
@@ -52,10 +56,13 @@ function App() {
                 <ViewRecipes />
               </Route>
               <Route path="/ViewUsers">
-                <ViewUsers />
+                <ViewUsers setUserToEdit={setUserToEdit}/>
               </Route>
               <Route path="/ViewMealTypes">
                 <ViewMealTypes />
+              </Route>
+              <Route path="/EditUser">
+                <EditUser userToEdit={userToEdit} />
               </Route>
             </Switch>
           </div>

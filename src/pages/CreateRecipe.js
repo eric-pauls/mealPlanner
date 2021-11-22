@@ -16,7 +16,8 @@ function CreateRecipe() {
 
   const history = useHistory();
 
-  const addRecipe = async () => {
+  const addRecipe = async e => {
+    e.preventDefault();
     const newRecipe = { recipeName, ingredients, instruction, calorieCount, typeID, userID }
     if (userID !== null) {
       const response = await fetch('http://flip1.engr.oregonstate.edu:9604/recipes', {
@@ -25,17 +26,15 @@ function CreateRecipe() {
         headers: {
           'Content-Type': 'application/json'
         },
-      });
-      if (response.status === 201) {
-
-      } else {
-        alert(`Failed to add recipe, status code = ${response.status}. Make sure all required fields are filled out.`);
-      }
+      })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(err => console.log(err))
+      history.push('/ViewRecipes')
     }
     else {
-      alert('Please choose a User')
+      alert('Please select a user.')
     }
-    history.push('/ViewRecipes')
   }
 
   return (
@@ -69,7 +68,7 @@ function CreateRecipe() {
             onChange={e => setCalorieCount(e.target.value)} />
         </div>
         <MealTypesRadio typeID={typeID} onMealTypeChange={setTypeID}/>
-        <button onClick={addRecipe}> Save Recipe</button>
+        <button onClick={e => addRecipe(e)}>Save Recipe</button>
       </form>
       <Link to="/">Cancel</Link>
     </div>

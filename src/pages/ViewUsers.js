@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
 import UsersTable from "../components/UsersTable";
 import { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
+function ViewUsers({setUserToEdit}) {
 
-function ViewUsers() {
-
+    
     const [users, setUsers] = useState([]);
+
+    const history = useHistory();
 
     const getUsers = async () => {
         await fetch('http://flip1.engr.oregonstate.edu:9604/users')
@@ -13,12 +16,18 @@ function ViewUsers() {
         
     };
 
+    const onEdit = user => {
+        setUserToEdit(user);
+        history.push('/EditUser')
+    };
+
     useEffect(() => {
         getUsers();
     }, []);
+
     return (
         <div>
-            <UsersTable users={users} />
+            <UsersTable users={users} onEdit={onEdit} />
             <Link to="/">Return to Homepage</Link>
         </div>
     )

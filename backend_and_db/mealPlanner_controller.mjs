@@ -108,7 +108,8 @@ app.post('/recipes', function(req, res){
   db.query(sql, inserts, function(err, data, fields){
       if (err) throw err;
       console.log("Recipe added successfully.")
-      
+      res.status(201);
+      res.end();
   });
 });
 
@@ -119,7 +120,8 @@ app.post('/users', function(req, res){
   db.query(sql, inserts, function(err, data, fields){
       if (err) throw err;
       console.log("User added successfully.")
-      
+      res.status(201);
+      res.end();
   });
 });
 
@@ -130,7 +132,8 @@ app.post('/mealplans', function(req, res){
   db.query(sql, inserts, function(err, data, fields){
       if (err) throw err;
       console.log("Meal plan added successfully.")
-      
+      res.status(201);
+      res.end();
   });
 });
 
@@ -141,7 +144,19 @@ app.post('/recipesmealplans', function(req, res){
   db.query(sql, inserts, function(err, data, fields){
       if (err) throw err;
       console.log("Recipe/Meal Plan relationship added successfully.")
-      
+      res.status(201);
+      res.end();
+  });
+});
+
+//  UPDATE users
+app.put('/users/:userID', function(req, res){
+  let sql = `UPDATE users SET userName = ? WHERE userID = ${req.params.userID}`;
+  let updates = [req.body.userName];
+  db.query(sql, updates, function(err, data, fields){
+      if (err) throw err;
+      console.log("User updated successfully.")
+      res.send(data);
   });
 });
 
