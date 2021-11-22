@@ -16,6 +16,16 @@ function ViewUsers({setUserToEdit}) {
         
     };
 
+    const deleteUser = async userID => {
+        const response = await fetch(`http://flip1.engr.oregonstate.edu:9604/users/${userID}`, {method: 'DELETE'});
+        if (response.status === 204) {
+            window.location.reload(false);
+        }
+        else {
+            console.error(`Failed to delete user with userID = ${userID}, status code = ${response.status}`)
+        }
+    };
+
     const onEdit = user => {
         setUserToEdit(user);
         history.push('/EditUser')
@@ -27,7 +37,7 @@ function ViewUsers({setUserToEdit}) {
 
     return (
         <div>
-            <UsersTable users={users} onEdit={onEdit} />
+            <UsersTable users={users} onEdit={onEdit} deleteUser={deleteUser} />
             <Link to="/">Return to Homepage</Link>
         </div>
     )

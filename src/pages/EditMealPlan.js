@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import RecipesMealPlansTable from "../components/RecipesMealPlansTable";
 import RecipeDropdown from "../components/RecipeDropdown";
 
-function EditMealPlan({ mealPlanToEdit }) {
+function EditMealPlan({ mealPlanToEdit, setPlanNameToEdit, setPlanIDToEdit }) {
 
   const storedName = localStorage.getItem('savedName');
   const storedID = Number(localStorage.getItem('savedID'));
@@ -14,18 +15,20 @@ function EditMealPlan({ mealPlanToEdit }) {
   const [day, setDay] = useState(null);
   const [assignedMeal, setAssignedMeal] = useState(null);
 
+  const history = useHistory();
+
   useEffect(() => {
     if (mealPlanToEdit !== undefined) {
       localStorage.setItem('savedID', mealPlanToEdit.planID);
-    }
-  }, [mealPlanToEdit]);
-  useEffect(() => {
-    if (mealPlanToEdit !== undefined) {
       localStorage.setItem('savedName', mealPlanToEdit.planName);
     }
   }, [mealPlanToEdit]);
 
-
+  const editPlanName = () => {
+    setPlanNameToEdit(mealPlanName);
+    setPlanIDToEdit(planID)
+    history.push('/EditMealPlanName')
+  };
 
   const addRecipeToMealPlan = async () => {
 
@@ -52,10 +55,21 @@ function EditMealPlan({ mealPlanToEdit }) {
     }
   };
 
+  const deleteRecipeFromMealPlan = async (planID, recipeID, day) => {
+    const response = await fetch(`http://flip1.engr.oregonstate.edu:9604/recipesmealplans/${planID}/${recipeID}/${day}`, { method: 'DELETE' });
+    if (response.status === 204) {
+      window.location.reload(false);
+    }
+    else {
+      console.error(`Failed to delete recipe from meal plan with planID = ${planID} recipeID = ${recipeID} day=${day}, status code = ${response.status}`)
+    }
+  };
+
   return (
     <div>
       <h1>My Meal Plan</h1>
       <h4>{mealPlanName}</h4>
+      <button onClick={() => editPlanName()}>Edit Plan Name</button>
       <table>
         <thead>
           <tr>
@@ -69,7 +83,7 @@ function EditMealPlan({ mealPlanToEdit }) {
             <th>Saturday</th>
           </tr>
         </thead>
-        <RecipesMealPlansTable planID={planID} />
+        <RecipesMealPlansTable planID={planID} deleteRecipeFromMealPlan={deleteRecipeFromMealPlan} />
       </table>
       <h2>Add Meal to Meal Plan</h2>
       <RecipeDropdown recipeID={recipeID} onRecipeChange={setRecipeID} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import MealPlan from './MealPlan';
 
-function MealPlansTable({mealPlans, editPlan}) {
+function MealPlansTable({mealPlans, editPlan, deletePlan}) {
     return (
         <div>
             <h2>Meal Plans Table</h2>
@@ -19,6 +19,7 @@ function MealPlansTable({mealPlans, editPlan}) {
                     {mealPlans.map((mealPlan, i) => <MealPlan
                         mealPlan={mealPlan}
                         editPlan={editPlan}
+                        deletePlan={deletePlan}
                         key={i} />)}
                 </tbody>
         </table>

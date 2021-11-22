@@ -8,7 +8,10 @@ function CreateMealPlan() {
   const [userID, setUserID] = useState(null);
   const [planName, setPlanName] = useState('');
 
-  const addMealPlan = async () => {
+  const history = useHistory();
+
+  const addMealPlan = async e => {
+    e.preventDefault();
     const newMealPlan = { planName, userID }
     if (userID !== null) {
       const response = await fetch('http://flip1.engr.oregonstate.edu:9604/mealplans', {
@@ -19,22 +22,17 @@ function CreateMealPlan() {
         },
       });
       if (response.status === 201) {
-
+        history.push('/')
       } else {
         alert(`Failed to add meal plan, status code = ${response.status}. Make sure all required fields are filled out.`);
       };
-      history.push('/ViewMealPlans');
     }
     else {
       alert('Please choose a User')
     }
   }
 
-  const history = useHistory();
 
-  const goToEdit = () => {
-    history.push("/EditMealPlan");
-  };
 
   return (
     <div>
@@ -47,7 +45,7 @@ function CreateMealPlan() {
             placeholder='Enter the Meal Plan Name'
             onChange={e => setPlanName(e.target.value)} />
         </div>
-        <button onClick={addMealPlan}> Create Meal Plan</button>
+        <button onClick={e => addMealPlan(e)}> Create Meal Plan</button>
       </form>
       <Link to="/">Return Home</Link>
     </div>

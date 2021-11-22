@@ -14,13 +14,26 @@ import ViewMealTypes from "./pages/ViewMealTypes"
 import ViewUsers from "./pages/ViewUsers"
 import "./App.css";
 import EditUser from "./pages/EditUser";
+import EditRecipe from "./pages/EditRecipe";
+import EditMealPlanName from "./pages/EditMealPlanName";
 
 function App() {
 
   const [mealPlanToEdit, setMealPlanToEdit] = useState();
   const [userToEdit, setUserToEdit] = useState();
   const [recipeToEdit, setRecipeToEdit] = useState();
+  const [planNameToEdit, setPlanNameToEdit] = useState();
+  const [planIDToEdit, setPlanIDToEdit] = useState()
 
+  const deletePlan = async planID => {
+    const response = await fetch(`http://flip1.engr.oregonstate.edu:9604/mealPlans/${planID}`, {method: 'DELETE'});
+    if (response.status === 204) {
+        window.location.reload(false);
+    }
+    else {
+        console.error(`Failed to delete recipe with planID = ${planID}, status code = ${response.status}`)
+    }
+};
 
   return (
     <div className="App">
@@ -29,7 +42,7 @@ function App() {
           <div>
             <Switch>
               <Route path="/" exact>
-                <HomePage setMealPlanToEdit={setMealPlanToEdit} />
+                <HomePage setMealPlanToEdit={setMealPlanToEdit} deletePlan={deletePlan} />
               </Route>
               <Route path="/LoginPage">
                 <LoginPage />
@@ -44,16 +57,16 @@ function App() {
                 <CreateRecipe />
               </Route>
               <Route path="/EditMealPlan">
-                <EditMealPlan mealPlanToEdit={mealPlanToEdit} />
+                <EditMealPlan mealPlanToEdit={mealPlanToEdit} setPlanNameToEdit={setPlanNameToEdit} setPlanIDToEdit={setPlanIDToEdit} />
               </Route>
               <Route path="/CreateMealPlan">
                 <CreateMealPlan />
               </Route>
               <Route path="/ViewMealPlans">
-                <ViewMealPlans />
+                <ViewMealPlans setMealPlanToEdit={setMealPlanToEdit} deletePlan={deletePlan} />
               </Route>
               <Route path="/ViewRecipes">
-                <ViewRecipes />
+                <ViewRecipes setRecipeToEdit={setRecipeToEdit}/>
               </Route>
               <Route path="/ViewUsers">
                 <ViewUsers setUserToEdit={setUserToEdit}/>
@@ -63,6 +76,12 @@ function App() {
               </Route>
               <Route path="/EditUser">
                 <EditUser userToEdit={userToEdit} />
+              </Route>
+              <Route path="/EditRecipe">
+                <EditRecipe recipeToEdit={recipeToEdit} />
+              </Route>
+              <Route path="/EditMealPlanName">
+                <EditMealPlanName planNameToEdit={planNameToEdit} planIDToEdit={planIDToEdit} />
               </Route>
             </Switch>
           </div>

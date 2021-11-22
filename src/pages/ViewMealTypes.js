@@ -11,7 +11,7 @@ function ViewMealTypes() {
         
         const data = await response.json();
 
-        if (response.ok) {
+        if (response.status === 200) {
             setMealTypes(data);
         }
         else {

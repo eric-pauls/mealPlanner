@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import UserDropdown from "../components/UserDropdown";
 import MealPlansTable from "../components/MealPlansTable";
 
-function HomePage({ setMealPlanToEdit }) {
+function HomePage({ setMealPlanToEdit, deletePlan }) {
 
 
   const [userID, setUserID] = useState(null);
@@ -41,8 +41,6 @@ function HomePage({ setMealPlanToEdit }) {
 
   return (
     <div>
-      <Link to="/LoginPage">Login To Your Account</Link>
-      <br />
       <Link to="/CreateUser">Create New User Account</Link>
       <br />
 
@@ -51,7 +49,7 @@ function HomePage({ setMealPlanToEdit }) {
         <UserDropdown userID={userID} onUserChange={setUserID} />
         <button onClick={() => filterMealPlans(userID)}>View Meal Plans</button>
         <br />
-        <MealPlansTable mealPlans={mealPlans} editPlan={editPlan} />
+        <MealPlansTable mealPlans={mealPlans} editPlan={editPlan} deletePlan={deletePlan}/>
       
 
       <Link to="/CreateRecipe">Create New Recipe</Link>

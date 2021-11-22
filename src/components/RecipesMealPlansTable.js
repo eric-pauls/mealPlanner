@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState, useEffect, useCallback} from 'react';
+import {AiOutlineEdit, AiOutlineDelete} from 'react-icons/ai';
 
 
-function RecipesMealPlansTable({ planID }) {
+function RecipesMealPlansTable({ planID, deleteRecipeFromMealPlan }) {
 
     const [recipeMealPlans, setRecipeMealPlans] = useState([]);
     const [recipes, setRecipes] = useState([]);
@@ -62,7 +63,7 @@ function RecipesMealPlansTable({ planID }) {
             }
             else { 
                 
-                entryArr.push(<td key={day}>{getRecipeByID(filteredByDay[0].recipeID)}</td>)  
+                entryArr.push(<td key={day}>{getRecipeByID(filteredByDay[0].recipeID)} <AiOutlineDelete onClick={() => deleteRecipeFromMealPlan(filteredByDay[0].planID, filteredByDay[0].recipeID, filteredByDay[0].day)} /></td>)  
             };
         };
 

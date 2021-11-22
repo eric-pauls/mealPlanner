@@ -37,7 +37,7 @@ CREATE TABLE `mealPlans` (
   `planName` varchar(255) NOT NULL,
   `userID` int(11) NOT NULL,
   PRIMARY KEY (`planID`),
-  FOREIGN KEY (`userID`) REFERENCES `users` (`userID`)
+  FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) on DELETE CASCADE
 );
 
 
@@ -47,9 +47,9 @@ CREATE TABLE `recipesMealPlans` (
   `planID` int(11) NOT NULL,
   `day` varchar(10) NOT NULL,
   `assignedMeal` varchar(10) NOT NULL,
-  PRIMARY KEY (`recipeID`, `planID`, `day`, `assignedMeal`),
-  FOREIGN KEY (`planID`) REFERENCES `mealPlans` (`planID`),
-  FOREIGN KEY (`recipeID`) REFERENCES `recipes` (`recipeID`)
+  PRIMARY KEY (`planID`, `day`, `assignedMeal`),
+  FOREIGN KEY (`planID`) REFERENCES `mealPlans` (`planID`) on DELETE CASCADE,
+  FOREIGN KEY (`recipeID`) REFERENCES `recipes` (`recipeID`) on DELETE CASCADE
 );
 
 -- Part B: Sample Data 

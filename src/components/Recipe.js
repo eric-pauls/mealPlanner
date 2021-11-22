@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function Recipe ({recipe}) {
+function Recipe ({recipe, onEdit, deleteRecipe}) {
     return (
         <tr>
             <td>{recipe.recipeID}</td>
@@ -11,6 +11,8 @@ function Recipe ({recipe}) {
             <td>{recipe.calorieCount}</td>
             <td>{recipe.typeID}</td>
             <td>{recipe.userID}</td>
+            <td><button onClick={() => onEdit(recipe)}>Edit</button></td>
+            <td><button onClick={() => deleteRecipe(recipe.recipeID)}>Delete</button></td>
         </tr>
     )
 }

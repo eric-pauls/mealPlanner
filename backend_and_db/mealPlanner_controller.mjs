@@ -131,9 +131,9 @@ app.post('/mealplans', function(req, res){
   let inserts = [req.body.planName, req.body.userID];
   db.query(sql, inserts, function(err, data, fields){
       if (err) throw err;
-      console.log("Meal plan added successfully.")
       res.status(201);
       res.end();
+      console.log("Meal plan added successfully.")
   });
 });
 
@@ -160,6 +160,75 @@ app.put('/users/:userID', function(req, res){
   });
 });
 
+//  UPDATE recipes
+app.put('/recipes/:recipeID', function(req, res){
+  let sql = `UPDATE recipes SET recipeName = ?, ingredients = ?, instruction = ?, calorieCount = ?, typeID = ?, userID = ? WHERE recipeID = ${req.params.recipeID}`;
+  let updates = [req.body.recipeName, req.body.ingredients, req.body.instruction, req.body.calorieCount, req.body.typeID, req.body.userID];
+  db.query(sql, updates, function(err, data, fields){
+      if (err) throw err;
+      console.log("Recipe updated successfully.")
+      res.send(data);
+  });
+});
+
+//  UPDATE meal plans
+app.put('/mealplans/:planID', function(req, res){
+  let sql = `UPDATE mealPlans SET planName = ? WHERE planID = ${req.params.planID}`;
+  let updates = [req.body.planName];
+  db.query(sql, updates, function(err, data, fields){
+      if (err) throw err;
+      console.log("Meal Plan updated successfully.")
+      res.send(data);
+  });
+});
+
+//  DELETE users
+app.delete('/users/:userID', function(req, res){
+  let sql = `DELETE FROM users WHERE userID = ?`;
+  let updates = [req.params.userID];
+  db.query(sql, updates, function(err, data, fields){
+      if (err) throw err;
+      console.log("User deleted successfully.")
+      res.status(204);
+      res.end();
+  });
+});
+
+//  DELETE recipes
+app.delete('/recipes/:recipeID', function(req, res){
+  let sql = `DELETE FROM recipes WHERE recipeID = ?`;
+  let updates = [req.params.recipeID];
+  db.query(sql, updates, function(err, data, fields){
+      if (err) throw err;
+      console.log("Recipe deleted successfully.")
+      res.status(204);
+      res.end();
+  });
+});
+
+//  DELETE meal plans
+app.delete('/mealplans/:planID', function(req, res){
+  let sql = `DELETE FROM mealPlans WHERE planID = ?`;
+  let updates = [req.params.planID];
+  db.query(sql, updates, function(err, data, fields){
+      if (err) throw err;
+      console.log("Meal Plan deleted successfully.")
+      res.status(204);
+      res.end();
+  });
+});
+
+//  DELETE recipe/meal plan relationships
+app.delete('/recipesmealplans/:planID/:recipeID/:day', function(req, res){
+  let sql = `DELETE FROM recipesMealPlans WHERE planID = ? AND recipeID = ? AND day = ?`;
+  let updates = [req.params.planID, req.params.recipeID, req.params.day];
+  db.query(sql, updates, function(err, data, fields){
+      if (err) throw err;
+      console.log("Meal Plan entry deleted successfully.")
+      res.status(204);
+      res.end();
+  });
+});
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
