@@ -37,7 +37,8 @@ function EditMealPlanName({ planNameToEdit, planIDToEdit }) {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                history.push('/ViewMealPlans')
+                history.goBack();
+                
             })
             .catch(err => console.log(err))
     }
@@ -49,6 +50,7 @@ function EditMealPlanName({ planNameToEdit, planIDToEdit }) {
                 <div>
                     <label>Plan Name:</label>
                     <input type="text"
+                        value={planName}
                         placeholder='Enter the Meal Plan Name'
                         onChange={e => setPlanName(e.target.value)} />
                 </div>
