@@ -2,10 +2,13 @@ import { Link } from "react-router-dom";
 import RecipesTable from "../components/RecipesTable";
 import { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
+import MealTypeDropdown from "../components/MealTypeDropdown";
 
 function ViewRecipes({setRecipeToEdit}) {
 
     const [recipes, setRecipes] = useState([]);
+    const [filteredRecipes, setFilteredRecipes] = useState([]);
+    const [typeID, setTypeID] = useState('null');
 
     const history = useHistory();
 
@@ -16,6 +19,7 @@ function ViewRecipes({setRecipeToEdit}) {
 
         if (response.ok) {
             setRecipes(data);
+            setFilteredRecipes(data);
         }
         else {
             console.error(`Could not fetch, status code = ${response.status}`)
@@ -32,6 +36,16 @@ function ViewRecipes({setRecipeToEdit}) {
         }
     };
 
+    const recipeSearch = () => {
+        if (typeID === 'null') {
+            setFilteredRecipes(recipes);
+        }
+        else {
+        const search = recipes.filter(recipe => recipe.typeID === Number(typeID));
+        setFilteredRecipes(search);
+        };
+    };
+
     const onEdit = recipe => {
         setRecipeToEdit(recipe);
         history.push('/EditRecipe')
@@ -43,7 +57,8 @@ function ViewRecipes({setRecipeToEdit}) {
 
     return (
         <div>
-            <RecipesTable recipes={recipes} onEdit={onEdit} deleteRecipe={deleteRecipe}></RecipesTable>
+            <MealTypeDropdown typeID={typeID} setTypeID={setTypeID} recipeSearch={recipeSearch}/>
+            <RecipesTable recipes={filteredRecipes} onEdit={onEdit} deleteRecipe={deleteRecipe}></RecipesTable>
             <Link to="/">Return to Homepage</Link>
         </div>
     )

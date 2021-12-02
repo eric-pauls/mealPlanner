@@ -10,6 +10,7 @@ function HomePage({ setMealPlanToEdit, deletePlan }) {
 
   const [userID, setUserID] = useState(null);
   const [mealPlans, setMealPlans] = useState([]);
+  const [filteredMealPlans, setFilteredMealPlans] = useState([]);
   const history = useHistory();
 
   const getMealPlans = async () => {
@@ -19,16 +20,20 @@ function HomePage({ setMealPlanToEdit, deletePlan }) {
 
         if (response.ok) {
             setMealPlans(data);
+            setFilteredMealPlans(data);
         }
         else {
             console.error(`Could not fetch, status code = ${response.status}`)
         }
   }
 
-  const filterMealPlans = userID => {
-    const filteredMealPlans = mealPlans.filter((mealPlan) => mealPlan.userID === userID)
-    return filteredMealPlans
-  }
+  const filterMealPlans = () => {
+    const filter = mealPlans.filter(mealPlan => mealPlan.userID === Number(userID));
+    setFilteredMealPlans(filter);
+    console.log(mealPlans);
+    console.log(userID);
+    console.log(filter);
+  };
 
   const editPlan = mealPlan => {
     setMealPlanToEdit(mealPlan)
@@ -41,15 +46,12 @@ function HomePage({ setMealPlanToEdit, deletePlan }) {
 
   return (
     <div>
-      <Link to="/CreateUser">Create New User Account</Link>
-      <br />
-
 
       <h1>Home: Your Meal Plans</h1>
         <UserDropdown userID={userID} onUserChange={setUserID} />
-        <button onClick={() => filterMealPlans(userID)}>View Meal Plans</button>
+        <button onClick={() => filterMealPlans()}>View Meal Plans</button>
         <br />
-        <MealPlansTable mealPlans={mealPlans} editPlan={editPlan} deletePlan={deletePlan}/>
+        <MealPlansTable mealPlans={filteredMealPlans} editPlan={editPlan} deletePlan={deletePlan}/>
       
 
       <Link to="/CreateRecipe">Create New Recipe</Link>
@@ -62,7 +64,7 @@ function HomePage({ setMealPlanToEdit, deletePlan }) {
       <br />
       <Link to="/ViewMealTypes">View Meal Types</Link>
       <br />
-      <Link to="/ViewUsers">View Users</Link>
+      <Link to="/ViewUsers">Add and View Users</Link>
     </div>)
 }
 

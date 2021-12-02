@@ -53,13 +53,13 @@ function RecipesMealPlansTable({ planID, deleteRecipeFromMealPlan }) {
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
         let entryArr = []
         const filteredEntries = recipeMealPlans.filter((recipe) => recipe.assignedMeal === meal)
-        console.log('hello')
+
         for (let day in days) {
             
             let filteredByDay = filteredEntries.filter((recipe) => recipe.day === days[day])
             
             if (filteredByDay.length !== 1) {
-                entryArr.push(<td key={day}>No Meal</td>)  
+                entryArr.push(<td key={day}>-</td>)  
             }
             else { 
                 

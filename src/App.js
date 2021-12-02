@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import CreateUser from "./pages/CreateUser";
 import CreateRecipe from "./pages/CreateRecipe";
 import DisplayRecipePage from "./pages/DisplayRecipePage";
 import EditMealPlan from "./pages/EditMealPlan";
@@ -46,9 +45,6 @@ function App() {
               </Route>
               <Route path="/LoginPage">
                 <LoginPage />
-              </Route>
-              <Route path="/CreateUser">
-                <CreateUser />
               </Route>
               <Route path="/DisplayRecipePage">
                 <DisplayRecipePage />
