@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import UserDropdown from "../components/UserDropdown";
+import UserDropdown from "../components/UserDropdown.js";
+import MealPlannerNavbar from "../components/Navbar";
 
 function CreateMealPlan() {
 
@@ -22,7 +23,7 @@ function CreateMealPlan() {
         },
       });
       if (response.status === 201) {
-        history.push('/')
+        history.push('/ViewMealPlans')
       } else {
         alert(`Failed to add meal plan, status code = ${response.status}. Make sure all required fields are filled out.`);
       };
@@ -37,6 +38,7 @@ function CreateMealPlan() {
   return (
     <div>
       <form>
+        <MealPlannerNavbar />
         <h1>Create Meal Plan</h1>
         <div>
           <UserDropdown userID={userID} onUserChange={setUserID} />
@@ -45,9 +47,10 @@ function CreateMealPlan() {
             placeholder='Enter the Meal Plan Name'
             onChange={e => setPlanName(e.target.value)} />
         </div>
-        <button onClick={e => addMealPlan(e)}> Create Meal Plan</button>
+        <button class='btn btn-outline-dark' onClick={e => addMealPlan(e)}>Create Meal Plan</button>
+        <br />
+        <button class='btn btn-outline-dark' onClick={e => history.push('/ViewMealPlans')}>Cancel</button>
       </form>
-      <Link to="/">Return Home</Link>
     </div>
   );
 }

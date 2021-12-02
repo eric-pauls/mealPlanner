@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import UserDropdown from "../components/UserDropdown";
+import UserDropdownForHomePage from "../components/UserDropdownForHomePage";
+import MealPlannerNavbar from "../components/Navbar";
 
 function EditMealPlanName({ planNameToEdit, planIDToEdit }) {
     
@@ -45,6 +46,7 @@ function EditMealPlanName({ planNameToEdit, planIDToEdit }) {
 
     return (
         <div>
+            <MealPlannerNavbar />
             <form>
                 <h1>Edit Meal Plan Name</h1>
                 <div>
@@ -54,9 +56,8 @@ function EditMealPlanName({ planNameToEdit, planIDToEdit }) {
                         placeholder='Enter the Meal Plan Name'
                         onChange={e => setPlanName(e.target.value)} />
                 </div>
-                <button onClick={e => editMealPlan(e)}>Save Meal Plan</button>
+                <button class='btn btn-outline-dark' onClick={e => editMealPlan(e)}>Save Meal Plan</button>
             </form>
-            <Link to="/">Return Home</Link>
         </div>
     );
 

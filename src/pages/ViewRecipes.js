@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import RecipesTable from "../components/RecipesTable";
 import { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import MealTypeDropdown from "../components/MealTypeDropdown";
+import MealTypeFilter from "../components/MealTypeFilter";
+import MealPlannerNavbar from "../components/Navbar";
 
 function ViewRecipes({setRecipeToEdit}) {
 
@@ -36,7 +37,7 @@ function ViewRecipes({setRecipeToEdit}) {
         }
     };
 
-    const recipeSearch = () => {
+    const recipeSearch = typeID => {
         if (typeID === 'null') {
             setFilteredRecipes(recipes);
         }
@@ -57,9 +58,10 @@ function ViewRecipes({setRecipeToEdit}) {
 
     return (
         <div>
-            <MealTypeDropdown typeID={typeID} setTypeID={setTypeID} recipeSearch={recipeSearch}/>
+            <MealPlannerNavbar />
+            <MealTypeFilter typeID={typeID} setTypeID={setTypeID} recipeSearch={recipeSearch}/>
             <RecipesTable recipes={filteredRecipes} onEdit={onEdit} deleteRecipe={deleteRecipe}></RecipesTable>
-            <Link to="/">Return to Homepage</Link>
+            <button class='btn btn-outline-dark' onClick={() => history.push('/CreateRecipe')}>Create New Recipe</button>
         </div>
     )
 }

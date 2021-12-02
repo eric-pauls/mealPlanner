@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import UserDropdown from '../components/UserDropdown';
+import UserDropdownForHomePage from '../components/UserDropdownForHomePage';
 import MealTypesRadio from "../components/MealTypesRadio";
+import MealPlannerNavbar from "../components/Navbar";
 
 function EditRecipe({ recipeToEdit }) {
 
@@ -59,6 +60,7 @@ function EditRecipe({ recipeToEdit }) {
 
     return (
         <div>
+            <MealPlannerNavbar />
             <form>
                 <h1>Edit Recipe</h1>
                 <div>
@@ -88,11 +90,9 @@ function EditRecipe({ recipeToEdit }) {
                         onChange={e => setCalorieCount(e.target.value)} />
                 </div>
                 <MealTypesRadio typeID={typeID} onMealTypeChange={setTypeID} />
-                <button onClick={e => editRecipe(e)}>Save Recipe</button>
+                <button class='btn btn-outline-dark' onClick={e => editRecipe(e)}>Save Recipe</button>
             </form>
-            <Link to="/ViewRecipes">ViewRecipes</Link>
             <br />
-            <Link to="/">Return Home</Link>
         </div>
     );
 }

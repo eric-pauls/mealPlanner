@@ -2,6 +2,9 @@ import { Link } from "react-router-dom";
 import UsersTable from "../components/UsersTable";
 import { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
+import MealPlannerNavbar from "../components/Navbar";
+
+
 function ViewUsers({ setUserToEdit }) {
 
 
@@ -56,18 +59,19 @@ function ViewUsers({ setUserToEdit }) {
 
     return (
         <div>
+            <MealPlannerNavbar />
             <form>
                 <h1>Create User</h1>
                 <div>
                     <label for="userName">Username:</label>
                     <input type="text"
-                        placeholder='Enter Your New User Name'
+                        placeholder='Enter Your User Name'
                         onChange={e => setUserName(e.target.value)} />
+                    <button class='btn btn-outline-dark' onClick={addUser}>Create User</button>
                 </div>
-                <button onClick={addUser}>Create User</button>
             </form>
+            <br />
             <UsersTable users={users} onEdit={onEdit} deleteUser={deleteUser} />
-            <Link to="/">Return to Homepage</Link>
         </div>
     )
 }

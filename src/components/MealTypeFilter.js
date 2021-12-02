@@ -3,7 +3,7 @@ import {useState, useEffect, useCallback} from 'react';
 
 
 
-function MealTypeDropdown({typeID, setTypeID, recipeSearch}) {
+function MealTypeFilter({typeID, setTypeID, recipeSearch}) {
 
     const [mealTypes, setMealTypes] = useState([]);
 
@@ -30,21 +30,19 @@ function MealTypeDropdown({typeID, setTypeID, recipeSearch}) {
     const mapping = () => {
         if (mealTypes !== null) {
             return mealTypes.map((mealType) => (
-                <option key = {mealType.typeID} value={mealType.typeID}>{mealType.mealName}</option>
+                <button  class='btn btn-outline-dark' onClick={()=>recipeSearch(mealType.typeID)}>{mealType.mealName}</button>
             ));
         };
     };
 
     return (
         <div>
-            <label>Search Recipes by Meal Type: </label>
-            <select onChange={changeMealType} val={typeID}>
-                <option value='null'>All Meals</option>
-                {mapping()}
-            </select>
-            <button onClick={()=>recipeSearch()}>Search</button>
+            <label>Filter Recipes by Meal Type: </label>
+            {mapping()}
+            
+            <button class='btn btn-outline-dark' onClick={()=>recipeSearch('null')}>All Recipes</button>
         </div>
     )
 }
 
-export default MealTypeDropdown
+export default MealTypeFilter

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import MealPlansTable from "../components/MealPlansTable";
 import { useState, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
+import MealPlannerNavbar from "../components/Navbar";
 
 
 function ViewMealPlans({setMealPlanToEdit, deletePlan}) {
@@ -35,8 +36,9 @@ function ViewMealPlans({setMealPlanToEdit, deletePlan}) {
     
     return (
         <div>
+            <MealPlannerNavbar />
             <MealPlansTable mealPlans={mealPlans} editPlan={editPlan} deletePlan={deletePlan} />
-            <Link to="/">Return to Homepage</Link>
+            <button class='btn btn-outline-dark' onClick={() => history.push('/CreateMealPlan')}>Create New Meal Plan</button>
         </div>
     )
 }

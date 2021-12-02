@@ -6,8 +6,8 @@ function User ({user, onEdit, deleteUser}) {
         <tr>
             <td>{user.userID}</td>
             <td>{user.userName}</td>
-            <td><button onClick={() => onEdit(user)}>Edit</button></td>
-            <td><button onClick={() => deleteUser(user.userID)}>Delete</button></td>
+            <td><button class='btn btn-outline-dark' onClick={() => onEdit(user)}>Edit</button></td>
+            <td><button class='btn btn-outline-dark' onClick={() => deleteUser(user.userID)}>Delete</button></td>
         </tr>
     );
 };

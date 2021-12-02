@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import RecipesMealPlansTable from "../components/RecipesMealPlansTable";
 import RecipeDropdown from "../components/RecipeDropdown";
+import MealPlannerNavbar from "../components/Navbar";
+import Table from 'react-bootstrap/Table';
 
 function EditMealPlan({ mealPlanToEdit, setPlanNameToEdit, setPlanIDToEdit }) {
 
@@ -101,10 +103,10 @@ function EditMealPlan({ mealPlanToEdit, setPlanNameToEdit, setPlanIDToEdit }) {
   }, [])
   return (
     <div>
+      <MealPlannerNavbar />
       <h1>My Meal Plan</h1>
-      <h4>{mealPlanName}</h4>
-      <button onClick={() => editPlanName()}>Edit Plan Name</button>
-      <table>
+      <h4>{mealPlanName} <button class='btn btn-outline-dark' onClick={() => editPlanName()}>Edit Plan Name</button></h4>
+      <Table size='sm' bordered responsive>
         <thead>
           <tr>
             <th>Meal</th>
@@ -118,10 +120,9 @@ function EditMealPlan({ mealPlanToEdit, setPlanNameToEdit, setPlanIDToEdit }) {
           </tr>
         </thead>
         <RecipesMealPlansTable planID={planID} deleteRecipeFromMealPlan={deleteRecipeFromMealPlan} />
-      </table>
+      </Table>
       <h2>Add Meal to Meal Plan</h2>
       <RecipeDropdown recipeID={recipeID} onRecipeChange={setRecipeID} />
-      <br />
       <label>Choose Day</label>
       <select onChange={e => setDay(e.target.value)}>
         <option value="">--Select one--</option>
@@ -143,11 +144,7 @@ function EditMealPlan({ mealPlanToEdit, setPlanNameToEdit, setPlanIDToEdit }) {
         <option value="Dinner">Dinner</option>
       </select>
       <br />
-      <button onClick={() => addRecipeToMealPlan()}>Update Meal Plan</button>
-      <br />
-
-      <Link to="/">Return Home</Link>
-
+      <button class='btn btn-outline-dark' onClick={() => addRecipeToMealPlan()}>Update Meal Plan</button>
     </div>
   );
 };

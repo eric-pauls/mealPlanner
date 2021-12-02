@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import UserDropdown from '../components/UserDropdown';
 import MealTypesRadio from "../components/MealTypesRadio";
+import MealPlannerNavbar from "../components/Navbar";
 
 function CreateRecipe() {
 
@@ -39,11 +40,11 @@ function CreateRecipe() {
 
   return (
     <div>
+      <MealPlannerNavbar />
       <form>
         <h1>Create Recipe</h1>
         <div>
           <UserDropdown userID={userID} onUserChange={setUserID} />
-          <br />
           <label>Recipe Name:</label>
           <input type="text"
             placeholder='Enter Recipe Name'
@@ -68,9 +69,11 @@ function CreateRecipe() {
             onChange={e => setCalorieCount(e.target.value)} />
         </div>
         <MealTypesRadio typeID={typeID} onMealTypeChange={setTypeID}/>
-        <button onClick={e => addRecipe(e)}>Save Recipe</button>
+        <button class='btn btn-outline-dark' onClick={e => addRecipe(e)}>Save Recipe</button>
+        <br />
+        <button class='btn btn-outline-dark' onClick={() => history.push('/ViewRecipes')}>Cancel</button>
       </form>
-      <Link to="/">Cancel</Link>
+      
     </div>
   );
 }

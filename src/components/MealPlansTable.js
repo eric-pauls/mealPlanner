@@ -5,7 +5,7 @@ function MealPlansTable({mealPlans, editPlan, deletePlan}) {
     return (
         <div>
             <h2>Meal Plans Table</h2>
-        <table>
+        <table class='table bordered table-hover'>
             <thead>
                     <tr>
                         <th>planID</th>

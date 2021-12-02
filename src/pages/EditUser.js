@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import MealPlannerNavbar from '../components/Navbar';
 
 
 
@@ -43,6 +44,7 @@ function EditUser({ userToEdit }) {
 
     return (
         <div>
+            <MealPlannerNavbar />
             <form>
                 <h1>Edit User</h1>
                 <div>
@@ -52,11 +54,8 @@ function EditUser({ userToEdit }) {
                         placeholder='Enter Your New User Name'
                         onChange={e => setUserName(e.target.value)} />
                 </div>
-                <button onClick={e => changeUser(e)}>Edit User</button>
+                <button class='btn btn-outline-dark' onClick={e => changeUser(e)}>Edit User</button>
             </form>
-            <Link to="/ViewUsers">View Users</Link>
-            <br />
-            <Link to="/">Return to Homepage</Link>
         </div>
     )
 };

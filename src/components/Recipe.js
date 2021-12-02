@@ -11,8 +11,8 @@ function Recipe ({recipe, onEdit, deleteRecipe}) {
             <td>{recipe.calorieCount}</td>
             <td>{recipe.typeID}</td>
             <td>{recipe.userID}</td>
-            <td><button onClick={() => onEdit(recipe)}>Edit</button></td>
-            <td><button onClick={() => deleteRecipe(recipe.recipeID)}>Delete</button></td>
+            <td><button class='btn btn-outline-dark' onClick={() => onEdit(recipe)}>Edit</button></td>
+            <td><button class='btn btn-outline-dark' onClick={() => deleteRecipe(recipe.recipeID)}>Delete</button></td>
         </tr>
     )
 }

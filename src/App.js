@@ -2,9 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useState } from "react";
 import HomePage from "./pages/HomePage";
-import LoginPage from "./pages/LoginPage";
 import CreateRecipe from "./pages/CreateRecipe";
-import DisplayRecipePage from "./pages/DisplayRecipePage";
 import EditMealPlan from "./pages/EditMealPlan";
 import CreateMealPlan from "./pages/CreateMealPlan";
 import ViewMealPlans from "./pages/ViewMealPlans";
@@ -42,12 +40,6 @@ function App() {
             <Switch>
               <Route path="/" exact>
                 <HomePage setMealPlanToEdit={setMealPlanToEdit} deletePlan={deletePlan} />
-              </Route>
-              <Route path="/LoginPage">
-                <LoginPage />
-              </Route>
-              <Route path="/DisplayRecipePage">
-                <DisplayRecipePage />
               </Route>
               <Route path="/CreateRecipe">
                 <CreateRecipe />

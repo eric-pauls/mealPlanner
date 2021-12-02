@@ -5,7 +5,7 @@ function MealTypesTable({mealTypes}) {
     return (
         <div>
             <h2>Meal Types Table</h2>
-        <table>
+        <table class='table bordered table-hover'>
             <thead>
                     <tr>
                         <th>typeID</th>

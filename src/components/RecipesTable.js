@@ -1,11 +1,12 @@
 import React from 'react';
 import Recipe from './Recipe'
+import Table from 'react-bootstrap/Table';
 
 function RecipesTable({recipes, onEdit, deleteRecipe}) {
     return (
         <div>
             <h2>Recipes Table</h2>
-        <table>
+        <Table size='sm' bordered hover responsive>
             <thead>
                     <tr>
                         <th>recipeID</th>
@@ -26,7 +27,7 @@ function RecipesTable({recipes, onEdit, deleteRecipe}) {
                         deleteRecipe={deleteRecipe}
                         key={i} />)}
                 </tbody>
-        </table>
+        </Table>
         </div>
     );
 };

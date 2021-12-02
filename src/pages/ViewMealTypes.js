@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import MealTypesTable from "../components/MealTypesTable";
 import { useState, useEffect } from 'react';
+import MealPlannerNavbar from '../components/Navbar'
 
 function ViewMealTypes() {
     
@@ -25,8 +26,8 @@ function ViewMealTypes() {
 
     return (
         <div>
+            <MealPlannerNavbar />
             <MealTypesTable mealTypes={mealTypes} />
-            <Link to="/">Return to Homepage</Link>
         </div>
     )
 }
