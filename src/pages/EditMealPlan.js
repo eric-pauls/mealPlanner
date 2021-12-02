@@ -14,6 +14,7 @@ function EditMealPlan({ mealPlanToEdit, setPlanNameToEdit, setPlanIDToEdit }) {
   const [recipeID, setRecipeID] = useState(null);
   const [day, setDay] = useState(null);
   const [assignedMeal, setAssignedMeal] = useState(null);
+  const [recipesMealPlans, setRecipesMealPlans] = useState([]);
 
   const history = useHistory();
 
@@ -30,12 +31,42 @@ function EditMealPlan({ mealPlanToEdit, setPlanNameToEdit, setPlanIDToEdit }) {
     history.push('/EditMealPlanName')
   };
 
+  const getRecipesMealPlans = async () => {
+    const response = await fetch('http://flip1.engr.oregonstate.edu:9604/recipesMealPlans');
+
+    const data = await response.json();
+
+    if (response.ok) {
+      setRecipesMealPlans(data);
+    }
+    else {
+      console.error(`Could not fetch, status code = ${response.status}`)
+    }
+  };
+
   const addRecipeToMealPlan = async () => {
 
     setMealPlanName(localStorage.getItem('savedName'));
     setPlanID(localStorage.getItem('savedID'));
     const newAssignment = { recipeID, planID, day, assignedMeal }
-    if (recipeID !== null && day !== null && assignedMeal !== null) {
+    const filter = recipesMealPlans.filter(e => e.planID === planID && e.day === day && e.assignedMeal === assignedMeal)
+
+    if (filter.length > 0) {
+      const response = await fetch(`http://flip1.engr.oregonstate.edu:9604/recipesmealplans/${planID}/${assignedMeal}/${day}`, {
+        method: 'PUT',
+        body: JSON.stringify(newAssignment),
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      });
+      if (response.status === 200) {
+
+      } else {
+        alert(`Failed to update meal plan, status code = ${response.status}.`);
+      };
+      window.location.reload(false);
+    }
+    else if (recipeID !== null && day !== null && assignedMeal !== null) {
       const response = await fetch('http://flip1.engr.oregonstate.edu:9604/recipesmealplans', {
         method: 'POST',
         body: JSON.stringify(newAssignment),
@@ -64,7 +95,10 @@ function EditMealPlan({ mealPlanToEdit, setPlanNameToEdit, setPlanIDToEdit }) {
       console.error(`Failed to delete recipe from meal plan with planID = ${planID} recipeID = ${recipeID} day=${day}, status code = ${response.status}`)
     }
   };
-
+  
+  useEffect(() => {
+    getRecipesMealPlans();
+  }, [])
   return (
     <div>
       <h1>My Meal Plan</h1>
